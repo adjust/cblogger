@@ -121,9 +121,9 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, param := range paramList {
 		if paramMap[param] != "" {
-			result += fmt.Sprintf("\"%s\",", strings.Replace(paramMap[param], "\"", "\\\"", -1))
+			result += fmt.Sprintf("\"%s\",", strings.Replace(fmt.Sprintf("%s", strings.Replace(paramMap[param], "\\", "\\\\", -1)), "\"", "\\\"", -1))
 		} else if paramMap[strings.ToLower(param)] != "" {
-			result += fmt.Sprintf("\"%s\",", strings.Replace(paramMap[strings.ToLower(param)], "\"", "\\\"", -1))
+			result += fmt.Sprintf("\"%s\",", strings.Replace(fmt.Sprintf("%s", strings.Replace(paramMap[strings.ToLower(param)], "\\", "\\\\", -1)), "\"", "\\\"", -1))
 		} else {
 			result += ","
 		}
